@@ -20,8 +20,13 @@ app.use(async (ctx, next) => {
 
 app.use(async (ctx,next)=>{
     await next()
-    ctx.response.type = 'text/html'
-    ctx.response.body = '<h1>Hello,koa2!</h1>'
+    // ctx.response.type = 'text/html'
+    // ctx.response.body = '<h1>Hello,koa2!</h1>'
+})
+
+app.use(async (ctx,next)=>{
+    ctx.response.body = ctx.request.url
+    console.log(`nihao + ${ctx.body}`)
 })
 
 app.listen(3000)
