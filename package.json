@@ -1,0 +1,19 @@
+{
+  "name": "hello-koa2",
+  "version": "1.0.0",
+  "description": "study koa2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa2",
+    "nodejs7.6"
+  ],
+  "author": "hellowor1d",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-bodyparser": "3.2.0"
+  }
+}
