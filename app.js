@@ -9,7 +9,17 @@ const Router = require('koa-router')
 
 app.use(async(ctx, next) => {
     console.log(`request method: ${ctx.request.method} ${ctx.request.url}`)
+    console.log(ctx.query)
+    console.log(ctx.querystring)
     await next()
+   let url= ctx.url
+     let ctx_query = ctx.query
+      let ctx_querystring =   ctx.querystring
+    ctx.body=  {
+         url,
+         ctx_query,
+         ctx_querystring
+    }
 })
 
 app.use(async(ctx, next) => {
