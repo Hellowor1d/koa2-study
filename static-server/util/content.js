@@ -6,7 +6,7 @@ const dir = require('./dir')
 const file = require('./file')
 
 async function content(ctx,fullStaticPath) {
-    let reqPath = paht.join(fullStaticPath,ctx.url)
+    let reqPath = path.join(fullStaticPath,ctx.url)
     let exist = fs.existsSync(reqPath)
     let content = ''
     if (!exist) {

@@ -1,7 +1,7 @@
 const Koa = require('koa')
 const path = require('path')
 const content = require('./util/content')
-const mimes = require('./util/mimes')
+const mimes = require('./util/mime')
 
 const app = new Koa()
 //获取静态文件地址
