@@ -1,6 +1,6 @@
 const url = require('url')
 const fs = require('fs')
-const path = require('paht')
+const path = require('path')
 
 //遍历读取目录的方法
 const walk = require('./walk')

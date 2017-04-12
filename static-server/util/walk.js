@@ -1,5 +1,5 @@
 const fs = require('fs')
-const mimes = require('mimes')
+const mimes = require('./mime')
 
 function walk(reqPath) {
     let files = fs.readdirSync(reqPath)
