@@ -1,16 +1,46 @@
-//koa-session 操作session练习
-// koa2原生功能只提供了cookie的操作，但是没有提供session操作。session就只用自己实现或者通过第三方中间件实现。在koa2中实现session的方案有一下几种
+//第一种设置session的方式：koa-generic-session  和 koa-redis 搭配。参照：https://github.com/koajs/generic-session
+//注意：必须事先开启redis数据库，才能正常
 
-// 如果session数据量很小，可以直接存在内存中
-// 如果session数据量很大，则需要存储介质存放session数据
+var session = require('koa-generic-session');
+var redisStore = require('koa-redis');
+var koa = require('koa');
 
-// 数据库存储方案
+var app = new koa();
+app.keys = ['keys', 'keykeys'];
+app.use(session({
+  store: redisStore()
+}));
 
-// 将session存放在MySQL数据库中
-// 需要用到中间件
-// koa-session-minimal 适用于koa2 的session中间件，提供存储介质的读写接口 。
-// koa-mysql-session 为koa-session-minimal中间件提供MySQL数据库的session数据读写操作。
-// 将sessionId和对于的数据存到数据库
-// 将数据库的存储的sessionId存到页面的cookie中
-// 根据cookie的sessionId去获取对于的session信息
+app.use(function *() {
+  switch (this.path) {
+  case '/get':
+    get.call(this);
+    break;
+  case '/remove':
+    remove.call(this);
+    break;
+  case '/regenerate':
+    yield regenerate.call(this);
+    break;
+  }
+});
 
+function get() {
+  var session = this.session;
+  session.count = session.count || 0;
+  session.count++;
+  this.body = session.count;
+}
+
+function remove() {
+  this.session = null;
+  this.body = 0;
+}
+
+function *regenerate() {
+  get.call(this);
+  yield this.regenerateSession();
+  get.call(this);
+}
+
+app.listen(8080);
