@@ -31,7 +31,7 @@ app.use( async ( ctx ) => {
     }
 
     // jsonp的script字符串
-    let jsonpStr = `;${callbackName}(${JSON.stringify(returnData)})`
+    let jsonpStr = `${callbackName}(${JSON.stringify(returnData)})`
 
     // 用text/javascript，让请求支持跨域获取
     ctx.type = 'text/javascript'
